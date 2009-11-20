@@ -2,7 +2,7 @@
  * DokuWiki Plugin @@PLUGIN_NAME@@ (Action Component)
  *
  * @license @@LICENSE@@
- * @author  @@AUTHOR_NAME@@ <@@AUTH_MAIL@@>
+ * @author  @@AUTHOR_NAME@@ <@@AUTHOR_MAIL@@>
  */
 
 // must be run within Dokuwiki
@@ -27,4 +27,4 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
 	@@HANDLERS@@
 }
 
-//vim ts:4:sw4:et:enc=utf-8:
+// vim ts:4:sw4:et:enc=utf-8:
