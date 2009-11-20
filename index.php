@@ -42,8 +42,8 @@
       <br />
       </div>
 
-      <label for="plugin[version]" class="block">Version:</label>
-      <input type="text" name="plugin[version]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
+      <label for="plugin[date]" class="block">Date:</label>
+      <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
       <br />
 
       <label for="plugin[license]" class="block">License:</label>
