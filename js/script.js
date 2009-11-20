@@ -128,16 +128,16 @@ var plugin_wiz = {
         switch(plugin_type) {
             case 'action':
                 var input_name  = 'plugin[components][action][' + plugin_name + '][events]';
-                component.append('<label for="' + input_name + '">Events:</label>');
-                component.append('<input type="text" class="autocomplete" value="" name="' + input_name + '" />');
+                div.append('<label for="' + input_name + '">Events:</label>');
+                div.append('<input type="text" class="autocomplete" value="" name="' + input_name + '" />');
                 data = plugin_wiz.action_plugin_events.split(',');
-                $('input.autocomplete', component).autocomplete(data, { 'multiple': true, 'multipleSeparator': ',', 'width': '300' } );
+                $('input.autocomplete', div).autocomplete(data, { 'multiple': true, 'multipleSeparator': ',', 'width': '300' } );
                 break;
 
             case 'syntax':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
-                component.append('<label for="' + input_name + '">Events:</label>');
-                component.append('<input type="hidden" value="" name="' + input_name + '" />');
+                div.append('<label for="' + input_name + '">Events:</label>');
+                div.append('<input type="hidden" value="" name="' + input_name + '" />');
                 // FIXME other stuff?
                 break;
 
@@ -145,8 +145,8 @@ var plugin_wiz = {
             case 'renderer':
             case 'admin':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
-                component.append('<label for="' + input_name + '">Events:</label>');
-                component.append('<input type="hidden" value="" name="' + input_name + '" />');
+                div.append('<label for="' + input_name + '">Events:</label>');
+                div.append('<input type="hidden" value="" name="' + input_name + '" />');
                 break;
         }
 
