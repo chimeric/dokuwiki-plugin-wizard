@@ -1,0 +1,84 @@
+/**
+ * CSS for DokuWiki Plugin Wizard
+ *
+ * @author Michael Klier <chi@chimeric.de>
+ */ 
+body {
+  font: 1em "Lucida Grande", Verdana, sans-serif;
+}
+
+div#container {
+  margin: 2em;
+}
+
+div#container form {
+  padding: 1em;
+}
+
+div#container label.block {
+  width: 15em;
+  float: left;
+  font-weight: bold;
+}
+
+div#container label.inline {
+  float: none;
+  display: inline;
+  font-weight: bold;
+}
+
+div#container input.edit,
+div#container select {
+  margin-bottom: 1em;
+}
+
+div#container input.readonly {
+  border: none;
+}
+
+div#container div.plugin_info input.readonly,
+div#container div.ajay__plugin_layout input.readonly {
+  width: 600px;
+}
+
+div#container input.focus {
+  border-color: red;
+}
+
+div#ajax__popup {
+  display: none;
+  position: absolute;
+  left: 35em;
+  top: 15em;
+  height: 300px;
+  width: 500px;
+  overflow: scroll;
+  border: 2px solid #333;
+  padding: 1em;
+  z-index: 1000;
+  background: #fff;
+}
+
+div#container label.ajax__plugin_component_name,
+div#container input.ajax__plugin_component_name {
+  display: none;
+}
+
+div#container span.plugin_component_name {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+div#container span.plugin_component_type {
+  display: none;
+}
+
+div#container div.plugin_component {
+  margin-top: 1em;
+  padding: 0.5em;
+  border: 1px dotted #ababab;
+}
+
+div.clearer {
+  clear: both;
+}
