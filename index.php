@@ -1,5 +1,137 @@
 <?php
-// FIXME define functions here and keep everything in one file?
+/**
+ * Saves $content to $file.
+ *
+ * @author  Andreas Gohr <andi@splitbrain.org>
+ * @return bool true on success
+ */
+function io_saveFile($file, $content){
+    $fileexists = @file_exists($file);
+    io_makeFileDir($file);
+    $fh = @fopen($file, 'wb');
+    if(!$fh){ return false; }
+    fwrite($fh, $content);
+    fclose($fh);
+    chmod($file, 0666);
+    return true;
+}
+
+/**
+ * Creates a directory hierachy.
+ *
+ * @link    http://www.php.net/manual/en/function.mkdir.php
+ * @author  <saint@corenova.com>
+ * @author  Andreas Gohr <andi@splitbrain.org>
+ */
+function io_mkdir_p($target){
+    if (@is_dir($target) || empty($target)) return 1; // best case check first
+    if (@file_exists($target) && !is_dir($target)) return 0;
+
+    //recursion
+    if (io_mkdir_p(substr($target,0,strrpos($target, '/')))) {
+        $ret = @mkdir($target,0775); // crawl back up & create dir tree
+        if($ret && 0775) chmod($target, 0775);
+        return $ret;
+    }
+    return 0;
+}
+
+/**
+ * Create the directory needed for the given file
+ *
+ * @author  Andreas Gohr <andi@splitbrain.org>
+ */
+function io_makeFileDir($file){
+    global $conf;
+
+    $dir = dirname($file);
+    if(!@is_dir($dir)){
+        io_mkdir_p($dir);
+    }
+}
+
+/**
+ * Creates a unique temporary directory and returns
+ * its path.
+ *
+ * @author Michael Klier <chi@chimeric.de>
+ */
+function io_mktmpdir() {
+    $base = './tmp';
+    $dir  = md5(uniqid(mt_rand(), true));
+    $tmpdir = $base.'/'.$dir;
+
+    if(io_mkdir_p($tmpdir)) {
+        return($tmpdir);
+    } else {
+        return false;
+    }
+}
+
+function create_bundle($conf) {
+    $bundle = array();
+
+    $search_replace = array(
+        '@@AUTHOR_NAME@@' => $conf['author']['name'],
+        '@@AUTHOR_MAIL@@' => $conf['author']['mail'],
+        '@@LICENSE@@'     => $conf['license'],
+        '@@PLUGIN_NAME@@' => $conf['name'],
+    );
+
+    $tmpd = io_mktmpdir();
+
+    /**
+      foreach component read in the relevant sekeleton replace al replacemetns
+      and add it to the bundle array
+
+        [/relative/path] => file-contents
+
+      then create the bundle by writing all files zip it and done
+    */
+    foreach($conf['components'] as $type => $components) {
+        foreach($conf['components'][$type] as $plugin => $data) {
+
+            switch($type) {
+                case 'action':
+                    if($data['events']) {
+                        $register = '';
+                        $handler  = '';
+                        $events = explode(',', $data['events']);
+                        foreach($events as $event) {
+                            if($event) {
+                                $register .= "\n" . '       $controller->register_hook(\'' . $event . '\', \'FIXME\', $this, \'handle_' . strtolower($event) . '\');';
+                                $handler  .= '    function handle_' . strtolower($event) . '(&$event, $param) { }' . "\n";
+                            }
+                        }
+                        $search_replace['@@REGISTER@@'] = $register . "\n   ";
+                        $search_replace['@@HANDLERS@@'] = $handler;
+                    } else {
+                        $search_replace['@@REGISTER@@'] = '';
+                        $search_replace['@@HANDLERS@@'] = '';
+                    }
+                    break;
+            }
+
+            list($tmp, $name) = explode('_', $plugin, 2);
+
+            $component['path'] = ($name) ?  $tmpd . '/' . $conf['name'] . '/' . $type . '/' . $name . '.php' : $tmpd . '/' . $conf['name'] . '/' . $type . '.php';
+            $search_replace['@@PLUGIN_COMPONENT_NAME@@'] = 'plugin_' . $type . '_' . $plugin;
+            $search_replace['@@INFO_TXT_PATH@@'] = ($name) ? '../plugin.info.txt' : 'plugin.info.txt';
+
+            $skel = file_get_contents('./skel/' . $type . '.skel');
+            $skel = str_replace(array_keys($search_replace), array_values($search_replace), $skel);
+
+            $component['skel'] = $skel;
+
+            array_push($bundle, $component);
+        }
+    }
+
+    foreach($bundle as $component) {
+        io_saveFile($component['path'], $component['skel']);
+    }
+}
+
 ?>
 <html>
 <head>
@@ -18,10 +150,8 @@
 
     <?php
     if(isset($_REQUEST['plugin_wiz_create'])) {
-        // FIXME DO STUFF
-        print '<pre>';
-        print_r($_REQUEST);
-        print '</pre>';
+        create_bundle($_REQUEST['plugin']);
+        print 'stuff done';
     } else {
     ?>
 

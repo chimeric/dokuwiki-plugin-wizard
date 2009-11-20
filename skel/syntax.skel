@@ -1,3 +1,4 @@
+<?php
 /**
  * DokuWiki Plugin @@PLUGIN_NAME@@ (Syntax Component)
  *
@@ -17,7 +18,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
 
     function getInfo() {
-        return confToHash(dirname(__FILE__).'@@INFO_TXT_PATH@@');
+        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
     }
 
     function getType() { return 'FIXME'; }

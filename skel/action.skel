@@ -1,3 +1,4 @@
+<?php
 /**
  * DokuWiki Plugin @@PLUGIN_NAME@@ (Action Component)
  *
@@ -20,11 +21,11 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
         return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
     }
 
-    function register(&$controller) {
-        @@REGISTER@@
+    function register(&$controller) { 
+@@REGISTER@@ 
     }
 
-    @@HANDLERS@@
+@@HANDLERS@@
 }
 
-// vim:ts:4:sw4:et:enc=utf-8:
+// vim:ts=4:sw=4:et:enc=utf-8:
