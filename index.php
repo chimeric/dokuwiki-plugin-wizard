@@ -33,6 +33,10 @@
       <input type="text" name="plugin[author][name]" value="" class="edit ajax__edit"></label>
       <br />
 
+      <label for="plugin[author][mail]" class="block">E-Mail:</label>
+      <input type="text" name="plugin[author][mail]" value="" class="edit ajax__edit"></label>
+      <br />
+
       <label for="plugin[name]" class="block">Plugin Name:</label>
       <input type="text" name="plugin[name]" value="" class="edit ajax__edit" id="ajax__plugin_name"/>
       <br />
