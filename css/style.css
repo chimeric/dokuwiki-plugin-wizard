@@ -4,7 +4,7 @@
  * @author Michael Klier <chi@chimeric.de>
  */ 
 body {
-  font: 1em "Lucida Grande", Verdana, sans-serif;
+  font: 0.8125em "Lucida Grande", Verdana, sans-serif;
 }
 
 div#container {
@@ -84,10 +84,11 @@ div#container span.plugin_component_type {
 }
 
 div#container div.plugin_component {
-  margin: 1em;
+  margin: 0.5em;
   padding: 0.5em;
   border: 1px dotted #ababab;
-  float: left;
+  width: 25em;
+  background: #cbcbcb;
 }
 
 div.clearer {

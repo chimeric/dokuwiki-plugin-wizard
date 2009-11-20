@@ -136,7 +136,6 @@ var plugin_wiz = {
 
             case 'syntax':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
-                div.append('<label for="' + input_name + '">Events:</label>');
                 div.append('<input type="hidden" value="" name="' + input_name + '" />');
                 // FIXME other stuff?
                 break;
@@ -145,7 +144,6 @@ var plugin_wiz = {
             case 'renderer':
             case 'admin':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
-                div.append('<label for="' + input_name + '">Events:</label>');
                 div.append('<input type="hidden" value="" name="' + input_name + '" />');
                 break;
         }
