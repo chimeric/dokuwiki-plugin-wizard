@@ -28,7 +28,9 @@
     <h1>DokuWiki Plugin Wizard</h1>
     <form action="index.php" method="post" id="ajax__plugin_wiz">
 
-      <div class="plugin_info">
+      <div id="plugin_info">
+        <h2>Plugin Information</h2>
+
         <label for="plugin[author][name]" class="block">Your Name:</label>
         <input type="text" name="plugin[author][name]" value="" class="edit ajax__edit"></label>
         <br />
@@ -59,35 +61,40 @@
           <option value="gpl">GPL</option>
         </select>
         <br />
-      </div>
 
       <label for="plugin[use_config]" class="block">Use Configuration:</label>
       <input type="checkbox" name="plugin[use_config]" id="ajax__has_config" />
       <div id="ajax__plugin_config"></div>
       <br />
 
-      <h2>Add Plugin Types</h2>
+      </div>
 
-      <label for="ajax__is_plugin_component" class="inline">Component:</label>
-      <input type="checkbox" name="ajax__is_plugin_component" id="ajax__is_plugin_component" />
-      <label for="ajax__plugin_component_name" class="ajax__plugin_component_name inline">Component Name:</label>
-      <input type="text" name="ajax__plugin_component_name" class="ajax__plugin_component_name" value="" />
+      <div id="plugin_components">
+        <h2>Add Plugin Types</h2>
 
-      <label for="ajax__plugin_component_type" class="inline">Type:</label>
-      <select name="ajax__plugin_component_type" id="ajax__plugin_component_type">
-        <option value="action">action</option>
-        <option value="syntax">syntax</option>
-        <option value="helper">helper</option>
-        <option value="renderer">renderer</option>
-        <option value="admin">admin</option>
-      </select>
-      <input type="button" name="ajax__btn_add_plugin_component" id="ajax__btn_add_plugin_component" value="add" />
+        <label for="ajax__is_plugin_component" class="inline">Component:</label>
+        <input type="checkbox" name="ajax__is_plugin_component" id="ajax__is_plugin_component" />
+        <label for="ajax__plugin_component_name" class="ajax__plugin_component_name inline">Component Name:</label>
+        <input type="text" name="ajax__plugin_component_name" class="ajax__plugin_component_name" value="" />
 
-      <div id="ajax__plugin_layout"></div>
-      <br />
+        <label for="ajax__plugin_component_type" class="inline">Type:</label>
+        <select name="ajax__plugin_component_type" id="ajax__plugin_component_type">
+          <option value="action">action</option>
+          <option value="syntax">syntax</option>
+          <option value="helper">helper</option>
+          <option value="renderer">renderer</option>
+          <option value="admin">admin</option>
+        </select>
+        <input type="button" name="ajax__btn_add_plugin_component" id="ajax__btn_add_plugin_component" value="add" />
+
+        <div id="ajax__plugin_layout"></div>
+        <br />
+
+      </div>
 
       <input type="submit" name="plugin_wiz_reset" value="reset" id="ajax__btn_reset" />
       <input type="submit" name="plugin_wiz_create" value="create" id="ajax__btn_create" />
+
     <form>
     <?php } ?>
 

@@ -11,6 +11,16 @@ div#container {
   margin: 2em;
 }
 
+div#container div#plugin_info {
+  width: 40%;
+}
+
+div#container div#plugin_components {
+  position: absolute;
+  left: 40%;
+  top: 6.8em;
+}
+
 div#container form {
   padding: 1em;
 }
@@ -74,9 +84,10 @@ div#container span.plugin_component_type {
 }
 
 div#container div.plugin_component {
-  margin-top: 1em;
+  margin: 1em;
   padding: 0.5em;
   border: 1px dotted #ababab;
+  float: left;
 }
 
 div.clearer {

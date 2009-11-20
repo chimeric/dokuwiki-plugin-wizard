@@ -111,18 +111,16 @@ var plugin_wiz = {
             return false;
         }
 
-        plugin_wiz.ajax__plugin_layout.append('<div id="' + id + '">'
-                                            + '<div class="plugin_component">'
+        plugin_wiz.ajax__plugin_layout.append('<div id="' + id + '" class="plugin_component">'
                                             + '<span class="plugin_component_type ' + plugin_type + '">' + plugin_type + '</span>'
                                             + '<a href="' + id + '" class="ajax__del_component">del</a>'
                                             + '<span class="plugin_component_name">' + id + ':</span>'
                                             + '</div>');
 
         var div = $('#' + id);
-        var component = $('.plugin_component', div);
 
         // bind delete function to delete link
-        $('a.ajax__del_component', component).click(function(event) {
+        $('a.ajax__del_component', div).click(function(event) {
             event.preventDefault();
             plugin_wiz.html_del_component(div);
         });
@@ -159,4 +157,4 @@ var plugin_wiz = {
 
 $(document).ready( function() { plugin_wiz.init() } );
 
-// vim:ts=4:sw=4:et:env=utf-8:
+// vim:ts=4:sw=4:et:enc=utf-8:
