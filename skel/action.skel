@@ -1,0 +1,30 @@
+/**
+ * DokuWiki Plugin @@PLUGIN_NAME@@ (Action Component)
+ *
+ * @license @@LICENSE@@
+ * @author  @@AUTHOR_NAME@@ <@@AUTH_MAIL@@>
+ */
+
+// must be run within Dokuwiki
+if (!defined('DOKU_INC')) die();
+
+if (!defined('DOKU_LF')) define('DOKU_LF', "\n");
+if (!defined('DOKU_TAB')) define('DOKU_TAB', "\t");
+if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
+
+require_once(DOKU_PLUGIN.'action.php');
+
+class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
+
+    function getInfo() {
+        return confToHash(dirname(__FILE__).'/../plugin.info.txt');
+    }
+	
+	function register(&$controller) {
+		@@REGISTER@@
+	}
+
+	@@HANDLERS@@
+}
+
+//vim ts:4:sw4:et:enc=utf-8:
