@@ -19,7 +19,7 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
     function getInfo() {
         return confToHash(dirname(__FILE__).'@@INFO_TXT_PATH@@');
     }
-	
+
     function getType() { return 'FIXME'; }
     function getPType() { return 'FIXME'; }
     function getSort() { return FIXME; }
@@ -28,10 +28,10 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
         $this->Lexer->FIXME;
     }
 
-	function render($mode, &$renderer, $data) {
-		if($mode == 'xhtml') {
-		}
-	}
+    function render($mode, &$renderer, $data) {
+        if($mode == 'xhtml') {
+        }
+    }
 }
 
-// vim ts:4:sw4:et:enc=utf-8:
+// vim:ts:4:sw4:et:enc=utf-8:
