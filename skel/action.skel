@@ -17,7 +17,7 @@ require_once(DOKU_PLUGIN.'action.php');
 class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
 
     function getInfo() {
-        return confToHash(dirname(__FILE__).'/../plugin.info.txt');
+        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
     }
 	
 	function register(&$controller) {
