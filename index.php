@@ -29,33 +29,37 @@
     <form action="index.php" method="post" id="ajax__plugin_wiz">
 
       <div class="plugin_info">
-      <label for="plugin[author][name]" class="block">Your Name:</label>
-      <input type="text" name="plugin[author][name]" value="" class="edit ajax__edit"></label>
-      <br />
+        <label for="plugin[author][name]" class="block">Your Name:</label>
+        <input type="text" name="plugin[author][name]" value="" class="edit ajax__edit"></label>
+        <br />
 
-      <label for="plugin[author][mail]" class="block">E-Mail:</label>
-      <input type="text" name="plugin[author][mail]" value="" class="edit ajax__edit"></label>
-      <br />
+        <label for="plugin[author][mail]" class="block">E-Mail:</label>
+        <input type="text" name="plugin[author][mail]" value="" class="edit ajax__edit"></label>
+        <br />
 
-      <label for="plugin[name]" class="block">Plugin Name:</label>
-      <input type="text" name="plugin[name]" value="" class="edit ajax__edit" id="ajax__plugin_name"/>
-      <br />
+        <label for="plugin[name]" class="block">Plugin Name:</label>
+        <input type="text" name="plugin[name]" value="" class="edit ajax__edit" id="ajax__plugin_name"/>
+        <br />
 
-      <label for=2plugin[desc]" class="block">Plugin Description:</label>
-      <input type="text" name="plugin[desc]" value="" class="edit ajax__edit" />
-      <br />
+        <label for="plugin[desc]" class="block">Plugin Description:</label>
+        <input type="text" name="plugin[desc]" value="" class="edit ajax__edit" />
+        <br />
+
+        <label for="plugin[url]" class="block">URL:</label>
+        <input type="text" name="plugin[url]" value="" class="edit ajax__edit" />
+        <br />
+
+        <label for="plugin[date]" class="block">Date:</label>
+        <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
+        <br />
+
+        <label for="plugin[license]" class="block">License:</label>
+        <select name="plugin[license]">
+          <option value="">FIXME</option>
+          <option value="gpl">GPL</option>
+        </select>
+        <br />
       </div>
-
-      <label for="plugin[date]" class="block">Date:</label>
-      <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
-      <br />
-
-      <label for="plugin[license]" class="block">License:</label>
-      <select name="plugin[license]">
-        <option value=""></option>
-        <option value="gpl">GPL</option>
-      </select>
-      <br />
 
       <label for="plugin[use_config]" class="block">Use Configuration:</label>
       <input type="checkbox" name="plugin[use_config]" id="ajax__has_config" />
