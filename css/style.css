@@ -97,7 +97,20 @@ div#container div.plugin_component {
   padding: 0.5em;
   border: 1px dotted #ababab;
   width: 25em;
-  background: #cbcbcb;
+  background: #dfdfdf;
+}
+
+div#container div.plugin_component .plugin_component_name {
+  font-size: 120%;
+  margin-bottom: 1em;
+}
+
+div#container div.plugin_component a.ajax__del_component {
+  float: right;
+  width: 24px;
+  height: 24px;
+  text-indent: -10000px;
+  background: transparent url(../pix/close.png) top left no-repeat;
 }
 
 div.clearer {
