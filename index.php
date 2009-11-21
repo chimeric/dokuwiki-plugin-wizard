@@ -139,6 +139,38 @@ function create_bundle($conf) {
     $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/plugin.info.skel',
                       'skel' => $skel);
 
+    // configuration
+    if($conf['use_config']){
+        $skel = file_get_contents('./skel/conf/default.skel');
+        $skel = str_replace(array_keys($search_replace),
+                            array_values($search_replace), $skel);
+        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/conf/default.php',
+                          'skel' => $skel);
+
+        $skel = file_get_contents('./skel/conf/metadata.skel');
+        $skel = str_replace(array_keys($search_replace),
+                            array_values($search_replace), $skel);
+        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/conf/metadata.php',
+                          'skel' => $skel);
+
+        if($conf['use_lang']){
+            $skel = file_get_contents('./skel/lang/settings.skel');
+            $skel = str_replace(array_keys($search_replace),
+                                array_values($search_replace), $skel);
+            $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/lang/en/settings.php',
+                              'skel' => $skel);
+        }
+    }
+
+    // localization
+    if($conf['use_lang']){
+        $skel = file_get_contents('./skel/lang/lang.skel');
+        $skel = str_replace(array_keys($search_replace),
+                            array_values($search_replace), $skel);
+        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/lang/en/lang.php',
+                          'skel' => $skel);
+    }
+
     // write output FIXME replace by zip action later
     foreach($bundle as $component) {
         io_saveFile($component['path'], $component['skel']);
@@ -198,13 +230,13 @@ function create_bundle($conf) {
         <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
         <br />
 
-      <label for="plugin[use_lang]" class="block">Use Localization:</label>
-      <input type="checkbox" name="plugin[use_lang]" id="ajax__has_lang" />
+      <label for="ajax__has_lang" class="block">Use Localization:</label>
+      <input type="checkbox" name="plugin[use_lang]" id="ajax__has_lang" value="1" />
       <div id="ajax__plugin_lang"></div>
       <br />
 
-      <label for="plugin[use_config]" class="block">Use Configuration:</label>
-      <input type="checkbox" name="plugin[use_config]" id="ajax__has_config" />
+      <label for="ajax__has_config" class="block">Use Configuration:</label>
+      <input type="checkbox" name="plugin[use_config]" id="ajax__has_config" value="1" />
       <div id="ajax__plugin_config"></div>
       <br />
 
