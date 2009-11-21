@@ -2,7 +2,7 @@
 /**
  * DokuWiki Plugin @@PLUGIN_NAME@@ (Action Component)
  *
- * @license @@LICENSE@@
+ * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @author  @@AUTHOR_NAME@@ <@@AUTHOR_MAIL@@>
  */
 
@@ -21,8 +21,8 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
         return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
     }
 
-    function register(&$controller) { 
-@@REGISTER@@ 
+    function register(&$controller) {
+@@REGISTER@@
     }
 
 @@HANDLERS@@

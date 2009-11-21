@@ -74,7 +74,6 @@ function create_bundle($conf) {
     $search_replace = array(
         '@@AUTHOR_NAME@@' => $conf['author']['name'],
         '@@AUTHOR_MAIL@@' => $conf['author']['mail'],
-        '@@LICENSE@@'     => $conf['license'],
         '@@PLUGIN_NAME@@' => $conf['name'],
     );
 
@@ -183,13 +182,6 @@ function create_bundle($conf) {
 
         <label for="plugin[date]" class="block">Date:</label>
         <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
-        <br />
-
-        <label for="plugin[license]" class="block">License:</label>
-        <select name="plugin[license]">
-          <option value="">FIXME</option>
-          <option value="gpl">GPL</option>
-        </select>
         <br />
 
       <label for="plugin[use_config]" class="block">Use Configuration:</label>
