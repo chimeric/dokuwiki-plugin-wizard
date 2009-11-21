@@ -7,6 +7,14 @@ body {
   font: 0.8125em "Lucida Grande", Verdana, sans-serif;
 }
 
+div.nojs {
+    background-color: #CF8181;
+    border: 1px solid #CF0000;
+    padding: 1em;
+    margin: 2em;
+    width: 20em;
+}
+
 div#container {
   margin: 2em;
 }

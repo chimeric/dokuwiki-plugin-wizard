@@ -180,7 +180,7 @@ function create_bundle($conf) {
 ?>
 <html>
 <head>
-  <title>DokuWiki Plugin Builder</title>
+  <title>DokuWiki Plugin Wizard</title>
   <script rel="text/javascript" charset="utf-8" src="js/jquery.js" ></script>
   <script rel="text/javascript" charset="utf-8" src="js/script.js" ></script>
   <script type="text/javascript" src="js/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
@@ -201,6 +201,12 @@ function create_bundle($conf) {
     ?>
 
     <h1>DokuWiki Plugin Wizard</h1>
+
+    <noscript>
+        <div class="nojs">Sorry, this wizard needs JavaScript to do its magic. It will not work with your current setup.</div>
+    </noscript>
+
+
     <form action="index.php" method="post" id="ajax__plugin_wiz">
 
       <div id="plugin_info">
