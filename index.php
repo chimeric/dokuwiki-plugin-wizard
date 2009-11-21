@@ -1,75 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
 
-/**
- * Saves $content to $file.
- *
- * @author  Andreas Gohr <andi@splitbrain.org>
- * @return bool true on success
- */
-function io_saveFile($file, $content){
-    $fileexists = @file_exists($file);
-    io_makeFileDir($file);
-    $fh = @fopen($file, 'wb');
-    if(!$fh){ return false; }
-    fwrite($fh, $content);
-    fclose($fh);
-    chmod($file, 0666);
-    return true;
-}
-
-/**
- * Creates a directory hierachy.
- *
- * @link    http://www.php.net/manual/en/function.mkdir.php
- * @author  <saint@corenova.com>
- * @author  Andreas Gohr <andi@splitbrain.org>
- */
-function io_mkdir_p($target){
-    if (@is_dir($target) || empty($target)) return 1; // best case check first
-    if (@file_exists($target) && !is_dir($target)) return 0;
-
-    //recursion
-    if (io_mkdir_p(substr($target,0,strrpos($target, '/')))) {
-        $ret = @mkdir($target,0775); // crawl back up & create dir tree
-        if($ret && 0775) chmod($target, 0775);
-        return $ret;
-    }
-    return 0;
-}
-
-/**
- * Create the directory needed for the given file
- *
- * @author  Andreas Gohr <andi@splitbrain.org>
- */
-function io_makeFileDir($file){
-    global $conf;
-
-    $dir = dirname($file);
-    if(!@is_dir($dir)){
-        io_mkdir_p($dir);
-    }
-}
-
-/**
- * Creates a unique temporary directory and returns
- * its path.
- *
- * @author Michael Klier <chi@chimeric.de>
- */
-function io_mktmpdir() {
-    $base = './tmp';
-    $dir  = md5(uniqid(mt_rand(), true));
-    $tmpdir = $base.'/'.$dir;
-
-    if(io_mkdir_p($tmpdir)) {
-        return($tmpdir);
-    } else {
-        return false;
-    }
-}
-
 function create_bundle($conf) {
     $bundle = array();
 
@@ -83,15 +14,9 @@ function create_bundle($conf) {
 
     );
 
-    $tmpd = io_mktmpdir();
-
     /**
       foreach component read in the relevant sekeleton replace al replacemetns
       and add it to the bundle array
-
-        [/relative/path] => file-contents
-
-      then create the bundle by writing all files zip it and done
     */
     foreach($conf['components'] as $type => $components) {
         foreach($conf['components'][$type] as $plugin => $data) {
@@ -119,7 +44,7 @@ function create_bundle($conf) {
 
             list($tmp, $name) = explode('_', $plugin, 2);
 
-            $component['path'] = ($name) ?  $tmpd . '/' . $conf['name'] . '/' . $type . '/' . $name . '.php' : $tmpd . '/' . $conf['name'] . '/' . $type . '.php';
+            $component['path'] = ($name) ?  $type . '/' . $name . '.php' : $type . '.php';
             $search_replace['@@PLUGIN_COMPONENT_NAME@@'] = 'plugin_' . $type . '_' . $plugin;
             $search_replace['@@INFO_TXT_PATH@@'] = ($name) ? '../plugin.info.txt' : 'plugin.info.txt';
 
@@ -143,7 +68,7 @@ function create_bundle($conf) {
     $skel = file_get_contents('./skel/info.skel');
     $skel = str_replace(array_keys($search_replace),
                         array_values($search_replace), $skel);
-    $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/plugin.info.txt',
+    $bundle[] = array('path' => 'plugin.info.txt',
                       'skel' => $skel);
 
     // configuration
@@ -151,20 +76,20 @@ function create_bundle($conf) {
         $skel = file_get_contents('./skel/conf/default.skel');
         $skel = str_replace(array_keys($search_replace),
                             array_values($search_replace), $skel);
-        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/conf/default.php',
+        $bundle[] = array('path' => 'conf/default.php',
                           'skel' => $skel);
 
         $skel = file_get_contents('./skel/conf/metadata.skel');
         $skel = str_replace(array_keys($search_replace),
                             array_values($search_replace), $skel);
-        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/conf/metadata.php',
+        $bundle[] = array('path' => 'conf/metadata.php',
                           'skel' => $skel);
 
         if($conf['use_lang']){
             $skel = file_get_contents('./skel/lang/settings.skel');
             $skel = str_replace(array_keys($search_replace),
                                 array_values($search_replace), $skel);
-            $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/lang/en/settings.php',
+            $bundle[] = array('path' => 'lang/en/settings.php',
                               'skel' => $skel);
         }
     }
@@ -174,16 +99,33 @@ function create_bundle($conf) {
         $skel = file_get_contents('./skel/lang/lang.skel');
         $skel = str_replace(array_keys($search_replace),
                             array_values($search_replace), $skel);
-        $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/lang/en/lang.php',
+        $bundle[] = array('path' => 'lang/en/lang.php',
                           'skel' => $skel);
     }
 
-    // write output FIXME replace by zip action later
+    // create zip file
+    $zipfile = tempnam('/tmp/','dwplugwiz').'.zip';
+    $zip     = new ZipArchive();
+    $res     = $zip->open($zipfile, ZipArchive::CREATE);
+    if($res !== true) die('failed to create zip: '.$res.' '.$zipfile.' '.$zip->status );
     foreach($bundle as $component) {
-        io_saveFile($component['path'], $component['skel']);
+        $zip->addFromString($conf['name'].'/'.ltrim($component['path'],'/'), $component['skel']);
     }
+    $zip->close();
+
+    // send to browser
+    header('Content-type: application/zip');
+    header('Content-disposition: attachment; filename='.$conf['name'].'-plugin.zip');
+    readfile($zipfile);
+    unlink($zipfile);
 }
 
+// create the zip:
+if(isset($_REQUEST['plugin_wiz_create'])) {
+    create_bundle($_REQUEST['plugin']);
+    exit;
+}
+// still here? Show the form.
 ?>
 <html>
 <head>
@@ -200,12 +142,6 @@ function create_bundle($conf) {
 <body>
   <div id="container">
 
-    <?php
-    if(isset($_REQUEST['plugin_wiz_create'])) {
-        create_bundle($_REQUEST['plugin']);
-        print 'stuff done';
-    } else {
-    ?>
 
     <h1>DokuWiki Plugin Wizard</h1>
 
@@ -282,7 +218,6 @@ function create_bundle($conf) {
       <input type="submit" name="plugin_wiz_create" value="create" id="ajax__btn_create" />
 
     <form>
-    <?php } ?>
 
   </div>
 </body>
