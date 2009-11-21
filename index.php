@@ -198,6 +198,11 @@ function create_bundle($conf) {
         <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
         <br />
 
+      <label for="plugin[use_lang]" class="block">Use Localization:</label>
+      <input type="checkbox" name="plugin[use_lang]" id="ajax__has_lang" />
+      <div id="ajax__plugin_lang"></div>
+      <br />
+
       <label for="plugin[use_config]" class="block">Use Configuration:</label>
       <input type="checkbox" name="plugin[use_config]" id="ajax__has_config" />
       <div id="ajax__plugin_config"></div>
