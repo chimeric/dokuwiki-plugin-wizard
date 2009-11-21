@@ -149,6 +149,17 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
         <div class="nojs">Sorry, this wizard needs JavaScript to do its magic. It will not work with your current setup.</div>
     </noscript>
 
+    <div class="intro">
+        <p>This wizard generates a <a href="http://www.dokuwiki.org/devel:plugins">DokuWiki plugin</a>
+           skeleton to help get started with coding.
+           Before using it you should familiarize your self with how plugins in DokuWiki work
+           and determine what components your plugin will need.</p>
+
+        <p>To use it, fill in the general plugin info and add plugin components. Once you're
+           done, click "create" and download your plugin skeleton.</p>
+
+        <div class="clearer" />
+    </div>
 
     <form action="index.php" method="post" id="ajax__plugin_wiz">
 
@@ -192,7 +203,7 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
       </div>
 
       <div id="plugin_components">
-        <h2>Add Plugin Types</h2>
+        <h2>Add Plugin Components</h2>
 
         <label for="ajax__is_plugin_component" class="inline">Component:</label>
         <input type="checkbox" name="ajax__is_plugin_component" id="ajax__is_plugin_component" />
@@ -214,6 +225,7 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
 
       </div>
 
+      <div class="clearer" />
       <input type="submit" name="plugin_wiz_reset" value="reset" id="ajax__btn_reset" />
       <input type="submit" name="plugin_wiz_create" value="create" id="ajax__btn_create" />
 

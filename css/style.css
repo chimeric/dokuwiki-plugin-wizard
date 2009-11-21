@@ -7,7 +7,7 @@ body {
   font: 0.8125em "Lucida Grande", Verdana, sans-serif;
 }
 
-div.nojs {
+div#container div.nojs {
     background-color: #CF8181;
     border: 1px solid #CF0000;
     padding: 1em;
@@ -15,24 +15,31 @@ div.nojs {
     width: 20em;
 }
 
+div#container div.intro p {
+    padding: 1em;
+    width: 30%;
+    float: left;
+}
+
 div#container {
   margin: 2em;
   background: transparent url(../pix/dwplugin-100.png) top right no-repeat;
 }
 
-div#container div#plugin_info {
-  width: 40%;
-}
-
-div#container div#plugin_components {
-  position: absolute;
-  left: 40%;
-  top: 6.8em;
-}
-
 div#container form {
   padding: 1em;
 }
+
+div#container div#plugin_info {
+  width: 40%;
+  float: left;
+}
+
+div#container div#plugin_components {
+  float: left;
+  width: 59%;
+}
+
 
 div#container label.block {
   width: 15em;
