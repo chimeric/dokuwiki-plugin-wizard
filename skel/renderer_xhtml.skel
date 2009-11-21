@@ -1,0 +1,32 @@
+<?php
+/**
+ * DokuWiki Plugin @@PLUGIN_NAME@@ (Renderer Component)
+ *
+ * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
+ * @author  @@AUTHOR_NAME@@ <@@AUTHOR_MAIL@@>
+ */
+
+// must be run within Dokuwiki
+if (!defined('DOKU_INC')) die();
+
+if (!defined('DOKU_LF')) define('DOKU_LF', "\n");
+if (!defined('DOKU_TAB')) define('DOKU_TAB', "\t");
+require_once DOKU_INC.'inc/parser/xhtml.php';
+
+class @@PLUGIN_COMPONENT_NAME@@ extends Doku_Renderer_xhtml {
+
+    function getInfo() {
+        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
+    }
+
+    /**
+     * Make available as XHTML replacement renderer
+     */
+    function canRender($format){
+        if($format == 'xhtml') return true;
+        return false;
+    }
+
+    // FIXME override any methods of Doku_Renderer_xhtml here
+}
+

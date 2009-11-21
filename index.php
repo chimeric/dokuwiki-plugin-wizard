@@ -123,7 +123,14 @@ function create_bundle($conf) {
             $search_replace['@@PLUGIN_COMPONENT_NAME@@'] = 'plugin_' . $type . '_' . $plugin;
             $search_replace['@@INFO_TXT_PATH@@'] = ($name) ? '../plugin.info.txt' : 'plugin.info.txt';
 
-            $skel = file_get_contents('./skel/' . $type . '.skel');
+            // use special skeleton for xhtml renderer
+            if($data['inherits'] == 'Doku_Renderer_xhtml'){
+                $skel = 'renderer_xhtml';
+            }else{
+                $skel = $type;
+            }
+
+            $skel = file_get_contents('./skel/' . $skel . '.skel');
             $skel = str_replace(array_keys($search_replace), array_values($search_replace), $skel);
 
             $component['skel'] = $skel;
@@ -136,7 +143,7 @@ function create_bundle($conf) {
     $skel = file_get_contents('./skel/info.skel');
     $skel = str_replace(array_keys($search_replace),
                         array_values($search_replace), $skel);
-    $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/plugin.info.skel',
+    $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/plugin.info.txt',
                       'skel' => $skel);
 
     // configuration
