@@ -17,6 +17,7 @@ div.nojs {
 
 div#container {
   margin: 2em;
+  background: transparent url(../pix/dwplugin-100.png) top right no-repeat;
 }
 
 div#container div#plugin_info {
