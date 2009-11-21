@@ -140,8 +140,15 @@ var plugin_wiz = {
                 // FIXME other stuff?
                 break;
 
-            case 'helper':
             case 'renderer':
+                var input_name  = 'plugin[components][renderer][' + plugin_name + '][inherits]';
+                div.append('<label for="' + input_name + '">Inherit from:</label>');
+                div.append('<select name="' + input_name + '">'+
+                           '  <option value="Doku_Renderer_xhtml">Doku_Renderer_xhtml</option>'+
+                           '  <option value="Doku_Renderer">Doku_Renderer</option>'+
+                           '</select>');
+                break;
+            case 'helper':
             case 'admin':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
                 div.append('<input type="hidden" value="" name="' + input_name + '" />');
