@@ -77,6 +77,10 @@ function create_bundle($conf) {
         '@@AUTHOR_NAME@@' => $conf['author']['name'],
         '@@AUTHOR_MAIL@@' => $conf['author']['mail'],
         '@@PLUGIN_NAME@@' => $conf['name'],
+        '@@PLUGIN_DESC@@' => $conf['desc'],
+        '@@PLUGIN_URL@@'  => $conf['url'],
+        '@@DATE@@'        => $conf['date'],
+
     );
 
     $tmpd = io_mktmpdir();
@@ -128,6 +132,14 @@ function create_bundle($conf) {
         }
     }
 
+    // plugin.info.txt
+    $skel = file_get_contents('./skel/info.skel');
+    $skel = str_replace(array_keys($search_replace),
+                        array_values($search_replace), $skel);
+    $bundle[] = array('path' => $tmpd.'/'.$conf['name'].'/plugin.info.skel',
+                      'skel' => $skel);
+
+    // write output FIXME replace by zip action later
     foreach($bundle as $component) {
         io_saveFile($component['path'], $component['skel']);
     }
