@@ -28,13 +28,14 @@ var plugin_wiz = {
             if($(this).attr('value')) {
                 $(this).attr('readonly', 'readonly');
                 $(this).addClass('readonly');
-                if($(this).hasClass('focus')) {
-                    $(this).removeClass('focus');
-                }
                 if($(this).attr('id') == 'ajax__plugin_name') {
                     plugin_wiz.plugin_name = $(this).attr('value');
                 }
             }
+        });
+
+        $('input.edit').blur(function() {
+                $(this).removeClass('focus');
         });
 
         $('input#ajax__is_plugin_component').change(function() {
@@ -82,9 +83,46 @@ var plugin_wiz = {
             }
         });
 
+
+        /**
+         * Validate input before submit
+         */
         $('form#ajax__plugin_wiz').submit(function(event) {
-            // remove unneed post vars
-            alert('validate stuff first');
+            var okay = true;
+
+            $('input.validate_string').each(function(i){
+                $(this).val($(this).val().trim());
+                if($(this).val() == ''){
+                    $(this).addClass('focus');
+                    okay = false;
+                }
+            });
+
+            $('input.validate_url').each(function(i){
+                $(this).val($(this).val().trim());
+                if(!$(this).val().match(/^https?:\/\//i)){
+                    $(this).addClass('focus');
+                    okay = false;
+                }
+            });
+
+            $('input.validate_date').each(function(i){
+                $(this).val($(this).val().trim());
+                if(!$(this).val().match(/^\d\d\d\d-\d\d-\d\d$/)){
+                    $(this).addClass('focus');
+                    okay = false;
+                }
+            });
+
+            if(!$('div.plugin_component').length){
+                alert('Doh! Your plugin needs to have at least one component');
+                event.preventDefault();
+            }else{
+                if(!okay){
+                    alert('Please make sure all fields are filled correctly');
+                    event.preventDefault();
+                }
+            }
         });
     },
 
@@ -129,9 +167,14 @@ var plugin_wiz = {
             case 'action':
                 var input_name  = 'plugin[components][action][' + plugin_name + '][events]';
                 div.append('<label for="' + input_name + '">Events:</label>');
-                div.append('<input type="text" class="autocomplete" value="" name="' + input_name + '" />');
+                div.append('<input type="text" class="autocomplete edit validate_string" value="" name="' + input_name + '" />');
+
                 data = plugin_wiz.action_plugin_events.split(',');
                 $('input.autocomplete', div).autocomplete(data, { 'multiple': true, 'multipleSeparator': ',', 'width': '300' } );
+
+                $('input.autocomplete').blur(function() {
+                        $(this).removeClass('focus');
+                });
                 break;
 
             case 'syntax':

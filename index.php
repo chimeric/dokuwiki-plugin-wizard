@@ -166,28 +166,28 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
       <div id="plugin_info">
         <h2>Plugin Information</h2>
 
-        <label for="plugin[author][name]" class="block">Your Name:</label>
-        <input type="text" name="plugin[author][name]" value="" class="edit ajax__edit"></label>
-        <br />
-
-        <label for="plugin[author][mail]" class="block">E-Mail:</label>
-        <input type="text" name="plugin[author][mail]" value="" class="edit ajax__edit"></label>
-        <br />
-
         <label for="plugin[name]" class="block">Plugin Name:</label>
         <input type="text" name="plugin[name]" value="" class="edit ajax__edit" id="ajax__plugin_name"/>
         <br />
 
+        <label for="plugin[author][name]" class="block">Your Name:</label>
+        <input type="text" name="plugin[author][name]" value="" class="edit validate_string"></label>
+        <br />
+
+        <label for="plugin[author][mail]" class="block">E-Mail:</label>
+        <input type="text" name="plugin[author][mail]" value="" class="edit validate_string"></label>
+        <br />
+
         <label for="plugin[desc]" class="block">Plugin Description:</label>
-        <input type="text" name="plugin[desc]" value="" class="edit ajax__edit" />
+        <input type="text" name="plugin[desc]" value="" class="edit validate_string" />
         <br />
 
         <label for="plugin[url]" class="block">URL:</label>
-        <input type="text" name="plugin[url]" value="" class="edit ajax__edit" />
+        <input type="text" name="plugin[url]" value="" class="edit validate_url" />
         <br />
 
         <label for="plugin[date]" class="block">Date:</label>
-        <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit ajax__edit" />
+        <input type="text" name="plugin[date]" value="<?php echo strftime('%Y-%m-%d', time())?>" class="edit validate_date" />
         <br />
 
       <label for="ajax__has_lang" class="block">Use Localization:</label>
