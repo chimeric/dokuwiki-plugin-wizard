@@ -226,7 +226,6 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
       </div>
 
       <div class="clearer" />
-      <input type="submit" name="plugin_wiz_reset" value="reset" id="ajax__btn_reset" />
       <input type="submit" name="plugin_wiz_create" value="create" id="ajax__btn_create" />
 
     <form>
