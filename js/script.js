@@ -24,16 +24,6 @@ var plugin_wiz = {
         plugin_wiz.ajax__plugin_layout = $('#ajax__plugin_layout');
         plugin_wiz.ajax__plugin_component_type = $('#ajax__plugin_component_type');
 
-        $('input.ajax__edit').blur(function() {
-            if($(this).attr('value')) {
-                $(this).attr('readonly', 'readonly');
-                $(this).addClass('readonly');
-                if($(this).attr('id') == 'ajax__plugin_name') {
-                    plugin_wiz.plugin_name = $(this).attr('value');
-                }
-            }
-        });
-
         $('input.edit').blur(function() {
                 $(this).removeClass('focus');
         });
@@ -52,11 +42,7 @@ var plugin_wiz = {
 
         $('input#ajax__btn_add_plugin_component').click(function() {
             // check if the plugin name is set
-            if(!plugin_wiz.plugin_name) {
-                $('input#ajax__plugin_name').focus();
-                $('input#ajax__plugin_name').addClass('focus');
-                return;
-            }
+            if(!plugin_wiz.validate_pluginname()) return;
 
             var plugin_type = $('option:selected', plugin_wiz.ajax__plugin_component_type).attr('value');
 
@@ -126,12 +112,37 @@ var plugin_wiz = {
         });
     },
 
+    validate_pluginname: function() {
+        var Jfield = $('#ajax__plugin_name');
+        Jfield.val(Jfield.val().trim());
+        if(!Jfield.val().match(/^[a-z][a-z0-9]*$/)){
+            // not a valid name, continue editing
+            Jfield.focus();
+            Jfield.addClass('focus');
+            plugin_wiz.plugin_name = '';
+            return false;
+        }else{
+            // valid name, make readonly
+            Jfield.removeClass('focus');
+            Jfield.addClass('readonly');
+            Jfield.attr('readonly', 'readonly');
+            plugin_wiz.plugin_name = Jfield.val();
+            return true;
+        }
+    },
+
     html_del_component: function(div) {
         var plugin_type = $('span.plugin_component_type', div).html();
         div.remove();
         // re-add plugin type to type selector if there aren't any more in the current layout
         if($('span.plugin_component_type.' + plugin_type, plugin_wiz.ajax__plugin_layout).length == 0) {
             plugin_wiz.ajax__plugin_component_type.append('<option value="' + plugin_type + '">' + plugin_type + '</option>');
+        }
+
+        // re-enable plugin name if no more components
+        if(!$('div.plugin_component').length){
+            $('#ajax__plugin_name').removeClass('readonly');
+            $('#ajax__plugin_name').removeAttr('readonly');
         }
     },
 

@@ -167,7 +167,7 @@ if(isset($_REQUEST['plugin_wiz_create'])) {
         <h2>Plugin Information</h2>
 
         <label for="plugin[name]" class="block">Plugin Name:</label>
-        <input type="text" name="plugin[name]" value="" class="edit ajax__edit" id="ajax__plugin_name"/>
+        <input type="text" name="plugin[name]" value="" class="edit" id="ajax__plugin_name"/>
         <br />
 
         <label for="plugin[author][name]" class="block">Your Name:</label>
