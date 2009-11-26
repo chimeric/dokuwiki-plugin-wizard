@@ -77,7 +77,7 @@ var plugin_wiz = {
             var okay = true;
 
             $('input.validate_string').each(function(i){
-                $(this).val($(this).val().trim());
+                $(this).val($.trim($(this).val()));
                 if($(this).val() == ''){
                     $(this).addClass('focus');
                     okay = false;
@@ -85,7 +85,7 @@ var plugin_wiz = {
             });
 
             $('input.validate_url').each(function(i){
-                $(this).val($(this).val().trim());
+                $(this).val($.trim($(this).val()));
                 if(!$(this).val().match(/^https?:\/\//i)){
                     $(this).addClass('focus');
                     okay = false;
@@ -93,7 +93,7 @@ var plugin_wiz = {
             });
 
             $('input.validate_date').each(function(i){
-                $(this).val($(this).val().trim());
+                $(this).val($.trim($(this).val()));
                 if(!$(this).val().match(/^\d\d\d\d-\d\d-\d\d$/)){
                     $(this).addClass('focus');
                     okay = false;
@@ -114,7 +114,7 @@ var plugin_wiz = {
 
     validate_pluginname: function() {
         var Jfield = $('#ajax__plugin_name');
-        Jfield.val(Jfield.val().trim());
+        Jfield.val($.trim(Jfield.val()));
         if(!Jfield.val().match(/^[a-z][a-z0-9]*$/)){
             // not a valid name, continue editing
             Jfield.focus();
