@@ -149,7 +149,7 @@ var plugin_wiz = {
     html_add_component: function(plugin_name, plugin_type) {
         if(!plugin_type) return;
 
-        var id = 'plugin_' + plugin_type + '_' + plugin_name;
+        var id = plugin_type + '_plugin_' + plugin_name;
 
         // do we have a plugin with that id already?
         if($('#' + id, plugin_wiz.ajax__plugin_layout).length > 0) {
@@ -188,12 +188,6 @@ var plugin_wiz = {
                 });
                 break;
 
-            case 'syntax':
-                var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
-                div.append('<input type="hidden" value="" name="' + input_name + '" />');
-                // FIXME other stuff?
-                break;
-
             case 'renderer':
                 var input_name  = 'plugin[components][renderer][' + plugin_name + '][inherits]';
                 div.append('<label for="' + input_name + '">Inherit from:</label>');
@@ -202,6 +196,7 @@ var plugin_wiz = {
                            '  <option value="Doku_Renderer">Doku_Renderer</option>'+
                            '</select>');
                 break;
+            case 'syntax':
             case 'helper':
             case 'admin':
                 var input_name  = 'plugin[components][' + plugin_type + '][' + plugin_name + ']';
