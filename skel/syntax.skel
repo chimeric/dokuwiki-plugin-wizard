@@ -21,17 +21,32 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
         return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
     }
 
-    function getType() { return 'FIXME'; }
-    function getPType() { return 'FIXME'; }
-    function getSort() { return FIXME; }
-
-    function connectTo($mode) {
-        $this->Lexer->FIXME;
+    function getType() {
+        return 'FIXME: container|baseonly|formatting|substition|protected|disabled|paragraphs';
     }
 
+    function getPType() {
+        return 'FIXME: normal|block|stack';
+    }
+
+    function getSort() {
+        return FIXME;
+    }
+
+
+    function connectTo($mode) {
+        $this->Lexer->addSpecialPattern('<FIXME>',$mode,'@@PLUGIN_COMPONENT_NAME@@');
+//        $this->Lexer->addEntryPattern('<FIXME>',$mode,'@@PLUGIN_COMPONENT_NAME@@');
+    }
+
+//    function postConnect() {
+//        $this->Lexer->addExitPattern('</FIXME>','@@PLUGIN_COMPONENT_NAME@@');
+//    }
+
     function render($mode, &$renderer, $data) {
-        if($mode == 'xhtml') {
-        }
+        if($mode != 'xhtml') return false;
+
+        return true
     }
 }
 
