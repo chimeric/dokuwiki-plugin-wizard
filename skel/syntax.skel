@@ -43,10 +43,16 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
 //        $this->Lexer->addExitPattern('</FIXME>','@@SYNTAX_COMPONENT_NAME@@');
 //    }
 
+    function handle($match, $state, $pos, &$handler){
+        $data = array();
+
+        return $data;
+    }
+
     function render($mode, &$renderer, $data) {
         if($mode != 'xhtml') return false;
 
-        return true
+        return true;
     }
 }
 
