@@ -46,6 +46,7 @@ function create_bundle($conf) {
 
             $component['path'] = ($name) ?  $type . '/' . $name . '.php' : $type . '.php';
             $search_replace['@@PLUGIN_COMPONENT_NAME@@'] = $type . '_plugin_' . $plugin;
+            $search_replace['@@SYNTAX_COMPONENT_NAME@@'] = 'plugin_' . $plugin;
             $search_replace['@@INFO_TXT_PATH@@'] = ($name) ? '../plugin.info.txt' : 'plugin.info.txt';
 
             // use special skeleton for xhtml renderer

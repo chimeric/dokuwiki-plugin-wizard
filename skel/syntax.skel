@@ -35,12 +35,12 @@ class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Syntax_Plugin {
 
 
     function connectTo($mode) {
-        $this->Lexer->addSpecialPattern('<FIXME>',$mode,'@@PLUGIN_COMPONENT_NAME@@');
-//        $this->Lexer->addEntryPattern('<FIXME>',$mode,'@@PLUGIN_COMPONENT_NAME@@');
+        $this->Lexer->addSpecialPattern('<FIXME>',$mode,'@@SYNTAX_COMPONENT_NAME@@');
+//        $this->Lexer->addEntryPattern('<FIXME>',$mode,'@@SYNTAX_COMPONENT_NAME@@');
     }
 
 //    function postConnect() {
-//        $this->Lexer->addExitPattern('</FIXME>','@@PLUGIN_COMPONENT_NAME@@');
+//        $this->Lexer->addExitPattern('</FIXME>','@@SYNTAX_COMPONENT_NAME@@');
 //    }
 
     function render($mode, &$renderer, $data) {
