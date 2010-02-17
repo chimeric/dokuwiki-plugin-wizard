@@ -13,13 +13,9 @@ if (!defined('DOKU_LF')) define('DOKU_LF', "\n");
 if (!defined('DOKU_TAB')) define('DOKU_TAB', "\t");
 if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 
-require_once(DOKU_PLUGIN.'action.php');
+require_once DOKU_PLUGIN.'action.php';
 
 class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Action_Plugin {
-
-    function getInfo() {
-        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
-    }
 
     function register(&$controller) {
 @@REGISTER@@

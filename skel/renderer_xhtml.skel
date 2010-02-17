@@ -15,10 +15,6 @@ require_once DOKU_INC.'inc/parser/xhtml.php';
 
 class @@PLUGIN_COMPONENT_NAME@@ extends Doku_Renderer_xhtml {
 
-    function getInfo() {
-        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
-    }
-
     /**
      * Make available as XHTML replacement renderer
      */

@@ -15,10 +15,6 @@ require_once DOKU_INC.'inc/parser/renderer.php';
 
 class @@PLUGIN_COMPONENT_NAME@@ extends Doku_Renderer {
 
-    function getInfo() {
-        return confToHash(dirname(__FILE__).'/@@INFO_TXT_PATH@@');
-    }
-
     /**
      * The format this renderer produces
      */

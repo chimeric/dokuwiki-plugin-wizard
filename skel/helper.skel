@@ -15,10 +15,6 @@ if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 
 class @@PLUGIN_COMPONENT_NAME@@ extends DokuWiki_Plugin {
 
-    function getInfo() {
-        return confToHash(dirname(__FILE__).'@@INFO_TXT_PATH@@');
-    }
-
 }
 
 // vim:ts=4:sw=4:et:enc=utf-8:
